@@ -1,0 +1,110 @@
+<% content_for :content do %>
+<div id="portlet-config" class="modal hide">
+	<div class="modal-header">
+		<button data-dismiss="modal" class="close" type="button"></button>
+		<h3>portlet Settings</h3>
+	</div>
+	<div class="modal-body">
+		<p>Here will be a configuration form</p>
+	</div>
+</div>
+<!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+<!-- BEGIN PAGE CONTAINER-->			
+<div class="container-fluid">
+	<!-- BEGIN PAGE HEADER-->
+	<div class="row-fluid">
+		<div class="span12">
+			
+			<!-- BEGIN PAGE TITLE & BREADCRUMB-->			
+			<h3 class="page-title">
+				Gallery Image Management Table			
+			</h3>
+			<ul class="breadcrumb">
+				<li>
+					<i class="icon-home"></i>
+					<a href="/admin">Dashboard</a> 
+					<i class="icon-angle-right"></i>
+				</li>
+				<li>
+					<a href="/admin/gallery_images">Gallery Images</a>
+					<i class="icon-angle-right"></i>
+				</li>
+				<li><a href="#">List of all Gallery Images</a></li>
+			</ul>
+			<!-- END PAGE TITLE & BREADCRUMB-->
+		</div>
+	</div>
+	<!-- END PAGE HEADER-->
+	<!-- BEGIN PAGE CONTENT-->
+	<div class="row-fluid">
+		<div class="span12">
+			<!-- BEGIN EXAMPLE TABLE PORTLET-->
+			<div class="portlet box blue">
+				<div class="portlet-title">
+					<div class="caption"><i class="icon-reorder"></i> Gallery Images Table</div>
+					<div class="tools">
+						<!-- <a href="javascript:;" class="collapse"></a> -->
+						<a href="javascript:;" class="reload"></a>
+						<!-- <a href="javascript:;" class="remove"></a> -->
+					</div>
+				</div>
+				<div class="portlet-body">
+					<div class="clearfix">
+						<div class="btn-group">
+							<%= link_to(new_admin_gallery_image_path, {:class => "btn green"}) do %>
+								Add New <i class="icon-plus"></i>
+							<% end %>
+						</div>
+					</div>
+					<table class="datatable table table-striped table-hover table-bordered">
+						<thead>
+							<tr>
+								<th>Created At</th>							
+							</tr>
+						</thead>
+						<tbody>
+							<% for a in @gallery_image %>
+							<tr class="">
+								<td><%= a.created_at %></td>
+								<td><%= link_to "Edit", edit_admin_gallery_image_path(a), {:class => "edit"} %> </td>
+								<td>
+									<%= link_to "Delete", admin_gallery_image_path(a), :confirm => 'Are you sure?', :method => :delete, :title => "Delete" %></td>
+								</td>
+							</tr>
+							<% end %>
+							
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<!-- END EXAMPLE TABLE PORTLET-->
+		</div>
+		</div>
+		<!-- END PAGE CONTENT -->
+	</div>
+	<!-- END PAGE CONTAINER-->
+</div>
+<% end %>
+<% content_for :page_level_styles do %>
+<link rel="stylesheet" type="text/css" href="/plugins/select2/select2_metro.css" />
+<link rel="stylesheet" href="/plugins/data-tables/DT_bootstrap.css" />
+<% end %>
+
+<% content_for :page_level_plugins do %>
+<script type="text/javascript" src="/plugins/select2/select2.min.js"></script>
+<script type="text/javascript" src="/plugins/data-tables/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/plugins/data-tables/DT_bootstrap.js"></script>
+
+<%= javascript_include_tag "admin/scripts/table-managed" %> 
+<% end %>
+
+<% content_for :page_level_scripts do %> 
+<script>
+   jQuery(document).ready(function() {       
+      // initiate layout and plugins
+      App.init();
+      TableManaged.init();
+   });
+</script>
+
+<% end %>

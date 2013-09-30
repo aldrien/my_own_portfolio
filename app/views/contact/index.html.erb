@@ -1,0 +1,250 @@
+<% content_for :extra_include do %><% end %>
+
+<% content_for :main_body do %>
+<script src="http://jqueryjs.googlecode.com/files/jquery-1.2.6.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+	
+	function clear_boxes(){
+		var firstname = document.getElementById('firstname').value="";
+		var lastname = document.getElementById('lastname').value="";
+		var email = document.getElementById('email').value="";
+		var phone = document.getElementById('phone').value="";
+		var message = document.getElementById('message').value="";
+		
+	}
+	
+	$(document).ready( function() {
+	
+	
+		var s = "<%= session[:enquiry] %>";
+		if(s == "Sent"){
+			$('#firstname').val('');
+			$('#lastname').val('');
+			$('#email').val('');
+			$('#phone').val('');
+			$('#message').val('');		
+			loadPopupBox();
+		};
+		
+		// $('#btnCancel').click(function(){
+			// $('#firstname').val('');
+			// $('#lastname').val('');
+			// $('#email').val('');
+			// $('#phone').val('');
+			// $('#message').val('');
+			// $('#firstname').focus();
+		// });
+	
+		$('#popupBoxClose').click( function() {			
+			unloadPopupBox();
+		});
+		
+		$('#container').click( function() {
+			unloadPopupBox();
+		});
+
+		function unloadPopupBox() {
+			$('#popup_box').fadeOut("slow");
+			$("#container").css({		
+				"opacity": "1"  
+			}); 
+		}	
+		
+		function loadPopupBox() {
+			$('#popup_box').fadeIn("slow");
+			$("#container").css({
+				"opacity": "0.3"  
+			}); 		
+		}
+		
+		$('#btnSubmit').click(function(){
+			return validate();
+		});
+		
+		function validate()
+		{
+			var firstname = document.getElementById('firstname');
+			var lastname = document.getElementById('lastname');
+			var email = document.getElementById('email');
+			var message = document.getElementById('message');
+			
+			if(firstname.value.length < 1)
+			{
+				firstname.focus();
+				return false;
+			}else if(lastname.value.length < 1){
+				lastname.focus();
+				return false;
+			}
+			
+			if(email.value.length < 1){
+				email.focus();
+				return false;				
+			}else{
+				return validEmail(email.value);
+				
+			}
+				
+		
+		}
+		
+		function validEmail(v) {
+		    var r = new RegExp("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?");
+		    //return (v.match(r) == null) ? false : true;
+		    if(!v.match(r)){
+		    	alert('Invalid email address format.');
+		    	email.focus();
+		    	return false;
+		    }else{
+		    	if(message.value.length < 1){
+					message.focus();
+					return false;
+				}
+		    }
+		}
+		
+		function validate_email_format(){
+			var emailRegex = new RegExp(/^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$/i);
+			var valid = emailRegex(email);
+			  if (!valid) {
+			    alert("Invalid e-mail address format.");
+			    email.focus();
+			    return false;
+			  } 
+		}
+				
+	});
+</script>
+<style type="text/css">
+
+#popup_box { 
+	display:none; /* Hide the DIV */
+	position:fixed;  
+	_position:absolute; /* for internet explorer 6 */  
+	height:30%;  
+	width:30%;  
+	background:#f1f1f2;  
+	left: 32%;
+	top: 30%;
+	z-index:100;
+	margin-left: 15px; 
+	
+	border: 0;
+	padding:15px;  
+	font-size:15px;  
+	-moz-box-shadow: 0 0 5px #acacac;
+	-webkit-box-shadow: 0 0 5px #acacac;
+	 box-shadow: 0 0 5px #acacac; 
+	
+}
+
+#main_container {
+	background: #c0bebe;
+	width:100%;
+	height:100%;
+}
+#popup_box a{
+	color: #333232;
+}
+a{  
+	cursor: pointer;  
+	text-decoration:none;  
+} 
+.border_set{
+	border: 1px solid #e5e5e5;
+}
+/* This is for the positioning of the Close Link */
+#popupBoxClose {
+	font-size:17px;  
+	line-height:15px;  
+	right:5px;  
+	top:5px;  
+	position:absolute;  
+	color:#6fa5e2;  
+	font-weight:500;  
+	padding-top: 5px;
+	padding-right: 5px;	
+}
+</style>
+
+<div align="center" id="popup_box">
+	<p style="font-size: 20px; font-weight: bolder; margin-top: 18%;">Your enquiry was successfully sent.</p>
+	<a href="/contact_us_enquiry" id="popupBoxClose">X</a>	
+</div>
+
+
+ <div class="block-transparent">
+     <div class="container">
+        <div class="row-fluid">
+           <div class="span6">
+              <h2>Email Me Now!</h2>
+             <%= form_for(@enquiry, :as => :enquiry, :validate => false,  :url => submit_enquiry_url) do |f| %>
+	              <p>
+	              	<div class="input-icon left">
+	              		<label style="color: #a40101; float: right; position: absolute;">&nbsp;*</label>
+                        <i class="icon-user"></i>
+	              		<%= f.text_field :firstname, :id => 'firstname', :class => "m-wrap span12", :placeholder => "Firstname"%>
+	              		
+	              	</div>
+	              </p>
+	              <p>
+	              	<div class="input-icon left">
+	              		<label style="color: #a40101; float: right; position: absolute;">&nbsp;*</label>
+                        <i class="icon-user"></i>
+	              		<%= f.text_field :lastname, :id => 'lastname', :class => "m-wrap span12", :placeholder => "Lastname" %>
+	              	</div>
+	              </p>
+	              <p>
+	              	<!-- <div class="input-prepend">
+                        <span class="add-on">@</span><
+                        <input class="m-wrap " type="text" placeholder="Email Address">
+                     </div> -->
+	              	<div class="input-icon left">
+	              		<label style="color: #a40101; float: right; position: absolute;">&nbsp;*</label>
+                        <i class="icon-envelope"></i>
+                        <%= f.text_field :email, :id => 'email', :class => "m-wrap span12", :placeholder => "Email" %>
+                     </div>
+	              </p>
+	              <p>
+	              	<div class="input-icon left">
+                        <i class="icon-phone"></i>
+	              		<%= f.text_field :phone, :id => 'phone', :style => "border: 1px solid #e5e5e5 !important;", :class => "m-wrap span12", :placeholder => "Contact No."%></p>
+	              	</div>
+	              <p>
+	              	<div class="">
+	              		<label style="color: #a40101; float: right; position: absolute;">&nbsp;*</label>
+                        <!-- <i class="icon-comment-alt"></i> -->
+	              		<%= f.text_area :message, :id => 'message', :style => "background: #fff;", :class => "span12 wysihtml5 m-wrap", :rows => "6", :placeholder => 'Your message here!' %>
+	              	</div>	
+	              </p>
+	              <p align="right">
+	              	<input name="submit" type="submit" id="btnSubmit" class="btn blue big hidden-print" value="Submit">
+	              	<!-- <button id="btnSubmit" type="button" class="btn blue big hidden-print">&nbsp;&nbsp;Submit&nbsp;&nbsp;</button>&nbsp;&nbsp; -->
+					<button id="btnCancel" onclick="clear_boxes()" type="button" class="btn big hidden-print">&nbsp;Cancel&nbsp;</button>
+				  </p>	
+             <% end %>
+           </div>
+           
+           <div class="span6">
+             <div style="margin-top: 12%; margin-left: 20%;"></div>
+             <h3>I'm looking forward to work with you!</h3>
+              <p>Olongapo City Zambales, Philippines</p>
+              <p>2200</p>
+              <p>Subic Bay Freeport Zone</p>
+              <p>(047) 222-2222</p>
+               Email: <a href="#">aldrien.test@gmail.com</a>
+              <p></p>
+           </div>
+        </div>
+     </div>
+</div>		
+
+
+<div align="center" id="popup_box">
+	<p style="font-size: 20px; font-weight: bolder; margin-top: 18%;">Your enquiry was successfully sent.</p>
+	<a href="/change_session" id="popupBoxClose">X</a>	
+</div>
+
+
+
+<% end %>

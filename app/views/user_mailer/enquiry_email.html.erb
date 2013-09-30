@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+  	<div style="color: #010101; font-size: 13px;">
+  		<b style="color: #064bbd;">Good Day Mr. Hate!</b>
+  		<br /><br />
+  		You have new email enquiry form www.mr_hate.com
+  		<br /><br />
+  		<p><b>From : </b>&nbsp; <%= @enquiry.firstname.capitalize %>&nbsp; <%= @enquiry.lastname.capitalize %></p>
+  		<p><b>Email Address : </b>&nbsp; <%= @enquiry.email %></p>
+  		<p><b>Contact # : </b>&nbsp; <% unless @enquiry.email.nil? %><%= @enquiry.email %><% else %> N/A <% end %></p>
+  		<p><b>Message : </b>&nbsp; <%= raw(@enquiry.message) %></p>
+  		<br /><br />
+  		Thank you.
+  		<br /><br />
+  		<!-- <a class="brand" href="www.mr_hate.com" target="_blank">
+            <img src="/assets/hate2.png" style="" alt="logo" />
+        </a> -->
+  		<i><b>Mr. Hate Web Enquiry</b></i>
+  	</div>
+	
+  </body>
+</html>

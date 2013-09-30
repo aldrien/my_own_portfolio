@@ -1,0 +1,242 @@
+<% content_for :content do %>
+<style>
+	.remove_row{
+		background-image: url('/assets/admin/icon_error.png');
+		background-repeat: no-repeat;
+		width: 15px;
+		height: 15px;
+	}
+</style>
+<div class="container-fluid">
+   <!-- BEGIN PAGE HEADER-->   
+   <div class="row-fluid">
+      <div class="span12">
+  
+         <h3 class="page-title">
+            Album Management Table
+         </h3>
+         <ul class="breadcrumb">
+            <li>
+               <i class="icon-home"></i>
+               <a href="/admin">Dashboard</a> 
+               <span class="icon-angle-right"></span>
+            </li>
+            <li>
+               <a href="/admin/albums">Albums</a>
+               <span class="icon-angle-right"></span>
+            </li>
+            <li><a href="#">Create Album</a></li>
+         </ul>
+      </div>
+   </div>
+   <!-- END PAGE HEADER-->
+   <!-- BEGIN PAGE CONTENT-->
+   <div class="row-fluid">
+      <div class="span12">
+         <!-- BEGIN SAMPLE FORM PORTLET-->   
+         <div class="portlet box blue">
+            <div class="portlet-title">
+               <h4><i class="icon-reorder"></i> Edit Album Form</h4>
+            </div>
+            <div class="portlet-body form">
+               <!-- BEGIN FORM-->
+				 <%= display_validation_errors(@album) %>
+				   <%= form_for(@album, :as => :album, :validate => true, :url => admin_album_path(@album), :html => {:multipart => true, :class => "form-horizontal"}) do |f| %>
+                  
+              
+                  <div class="control-group">
+                     <label class="control-label">Album Title</label>
+                     <div class="controls">
+						<%= f.text_field :title, :class => 'span6 m-wrap popovers', "data-trigger" => "hover", "data-content" => "Album Title", "data-original-title" => "Information"  %>  
+                     </div>
+                  </div>
+                  
+                   <div class="control-group">
+                     <label class="control-label">Description</label>
+                     <div class="controls">
+                        <div class="input-icon left">
+                           <%= f.text_area :description, :class => "ckeditor" %>
+						</div>
+                     </div>
+                  </div>
+                  
+                  <div class="control-group">
+                     <label class="control-label">Is Published?</label>
+                     <div class="controls">
+                        <div class="input-icon left">
+						   <%= f.check_box :is_published %>
+                        </div>
+                     </div>
+                  </div>
+                  
+                  <div align="center" class="control-group" style="width: 100%;">
+                  	<% new_id = Time.now.to_i %>
+                  	
+                  	<% unless @gallery_images.empty? %>
+						<% @gallery_images.each do |img| %>
+								 <div id="<%= img.id %>" style="margin-left:5%; display: inline; position: relative; float: left;">
+				                     <div class="fileupload fileupload-new" data-provides="fileupload">
+				                     	<a href="javascript:void(0)" rel="<%= img.id %>" class="remove_row" style="float: right; margin-top: -10px;"></a>
+				                        <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
+				                        	<img src="/images/gallery_images/<%= img.id %>/thumb/<%= img.image_file_name %>" />
+				                           <!-- <#%= image_tag img.image.url(:thumb) %> -->
+				                        </div>
+				                        <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
+				                        <div>
+				                        	<input class="m-wrap" value="<%= img.description %>" name="gallery[description][<%= img.id %>]" placeholder="say something..." size="30" style="width: 195px; margin-left: -15px;" type="text">
+				                        </div>
+				                        <div align="left" style="padding-top: 5px;">
+				                           <span class="btn btn-file">
+				                           		<span class="fileupload-new">Browse Image</span>
+				                          	 	<span class="fileupload-exists">Change</span>
+				                           		<input class="default" multipart="true" name="gallery[photo][<%= img.id %>]" type="file" multiple="multiple">
+				                           </span>
+				                           <a href="#" class="btn fileupload-exists" data-dismiss="fileupload" >Remove</a>
+				                        </div>
+				                     </div>
+				                     <input type="hidden" name="gallery[clone_description][<%= img.id %>]" value="<%= img.description %>" />
+				                 	 <input type="hidden" name="gallery[clone_photo][<%= img.id %>]" value="<%= img.image_file_name %>" />
+				                 </div>
+				    	<% end %>
+				    <% else %>
+				    	<div style="margin-left:5%; display: inline; position: relative; float: left;">
+	                     <div class="fileupload fileupload-new" data-provides="fileupload">
+	                     	
+	                        <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
+	                           <img src="/assets/admin/no_profile_image.jpg" alt="" width="150px">
+	                        </div>
+	                        <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
+	                        <div>
+	                        	<input class="m-wrap" id="gallery_description" name="gallery[description]['+ new_id +']" placeholder="say something..." size="30" style="width: 195px;" type="text">
+	                        </div>
+	                        <div align="left" style="padding-top: 5px;">
+	                           <span class="btn btn-file">
+	                           		<span class="fileupload-new">Browse Image</span>
+	                          	 	<span class="fileupload-exists">Change</span>
+	                           		<input class="default" name="gallery[photo]['+ new_id +']" type="file">
+	                           </span>
+	                           <a href="form_component.html#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
+	                        </div>
+	                     </div>
+	                     
+	                   </div>
+					<% end %>
+					
+                  	<div class="control-group" id="field_container"></div>
+                  </div>
+                  
+                   <div class="control-group">
+                     <label class="control-label">
+                     	<a href="javascript:void(0)" class="btn green" title="Add Photo" id="add_fields">Add Photo</a>
+                     </label>
+                  </div>
+                  
+                  <div align="right" class="form-actions">
+                     <button type="submit" class="btn blue"><%=t :submit %></button>
+					 <a href="/admin/albums" class="btn"><%=t :cancel %></a>
+                  </div>
+				  <% end %>
+               <!-- END FORM-->           
+            </div>
+         </div>
+         <!-- END SAMPLE FORM PORTLET-->
+      </div>
+   </div>
+</div>
+
+<% end %>
+
+
+<% content_for :page_level_styles do %>
+<link rel="stylesheet" type="text/css" href="/plugins/bootstrap-fileupload/bootstrap-fileupload.css" />
+<!-- <link rel="stylesheet" type="text/css" href="/plugins/gritter/css/jquery.gritter.css" /> -->
+<link rel="stylesheet" type="text/css" href="/plugins/chosen-bootstrap/chosen/chosen.css" />
+<link rel="stylesheet" type="text/css" href="/plugins/select2/select2_metro.css" />
+<link rel="stylesheet" type="text/css" href="/plugins/jquery-tags-input/jquery.tagsinput.css" />
+<link rel="stylesheet" type="text/css" href="/plugins/clockface/css/clockface.css" />
+<link rel="stylesheet" type="text/css" href="/plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.css" />
+<link rel="stylesheet" type="text/css" href="/plugins/bootstrap-datepicker/css/datepicker.css" />
+<link rel="stylesheet" type="text/css" href="/plugins/bootstrap-timepicker/compiled/timepicker.css" />
+<!-- <link rel="stylesheet" type="text/css" href="/plugins/bootstrap-colorpicker/css/colorpicker.css" /> -->
+<link rel="stylesheet" type="text/css" href="/plugins/bootstrap-toggle-buttons/static/stylesheets/bootstrap-toggle-buttons.css" />
+<link rel="stylesheet" type="text/css" href="/plugins/bootstrap-daterangepicker/daterangepicker.css" />
+<link rel="stylesheet" type="text/css" href="/plugins/bootstrap-datetimepicker/css/datetimepicker.css" />
+
+<% end %>
+
+<% content_for :page_level_plugins do %>
+<script type="text/javascript" src="/plugins/ckeditor/ckeditor.js"></script>  
+<script type="text/javascript" src="/plugins/bootstrap-fileupload/bootstrap-fileupload.js"></script>
+<script type="text/javascript" src="/plugins/chosen-bootstrap/chosen/chosen.jquery.min.js"></script>
+<script type="text/javascript" src="/plugins/select2/select2.min.js"></script>
+<script type="text/javascript" src="/plugins/bootstrap-wysihtml5/wysihtml5-0.3.0.js"></script> 
+<script type="text/javascript" src="/plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.js"></script>
+<script type="text/javascript" src="/plugins/jquery-tags-input/jquery.tagsinput.min.js"></script>
+<script type="text/javascript" src="/plugins/bootstrap-toggle-buttons/static/js/jquery.toggle.buttons.js"></script>
+<script type="text/javascript" src="/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+<script type="text/javascript" src="/plugins/clockface/js/clockface.js"></script>
+<script type="text/javascript" src="/plugins/bootstrap-daterangepicker/date.js"></script>
+<script type="text/javascript" src="/plugins/bootstrap-daterangepicker/daterangepicker.js"></script> 
+<!-- <script type="text/javascript" src="/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>   -->
+<script type="text/javascript" src="/plugins/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
+<script type="text/javascript" src="/plugins/jquery-inputmask/jquery.inputmask.bundle.min.js"></script>   
+<script type="text/javascript" src="/plugins/jquery.input-ip-address-control-1.0.min.js"></script>
+
+<%= javascript_include_tag "admin/scripts/form-components" %> 
+<% end %>
+
+<% content_for :page_level_scripts do %> 
+<script type="text/javascript">
+	$(function(){
+		jQuery.ajaxSetup( { 
+					'beforeSend': function( xhr ) {
+				  		xhr.setRequestHeader( 'Accept', 'text/javascript' );
+				  		xhr.setRequestHeader( 'X-CSRF-Token', $( 'meta[name=csrf-token]' ).attr( 'content' ) );
+				},
+			   		'complete': function() {
+				}
+		} );
+		
+		$("#add_fields").live('click', function(e){
+			buildRow();
+		})
+		
+		$('.remove_row').live('click', function(e){
+			field_id = $(this).attr('rel');
+			$('#' + field_id).remove()
+		})		
+		
+		function buildRow(){
+			var new_id = new Date().getTime();
+			var fieldRow ='<div id="'+ new_id +'" style="display: inline; position: relative; float: left; margin-left: 5%;">'+
+						'<div class="fileupload fileupload-new" data-provides="fileupload">'+
+							'<a href="javascript:void(0)" rel="'+ new_id +'" class="remove_row" style="float: right; margin-top: -10px;"></a>'+
+	                        '<div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">'+
+	                           '<img src="/assets/admin/no_profile_image.jpg" alt="" width="150px">'+
+	                        '</div>'+
+	                        '<div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>'+
+	                        '<div align="left"><input class="m-wrap" name="gallery[description]['+ new_id +']" placeholder="say something..." style="width: 195px;" type="text" /></div>'+
+	                        
+	                        '<div align="left" style="margin-top: 5px;">'+
+	                           '<span class="btn btn-file"><span class="fileupload-new">Browse Image</span>'+
+	                           '<span class="fileupload-exists">Change</span>'+
+	                           '<input class="default" name="gallery[photo]['+ new_id +']" type="file" multiple="multiple">'+
+	                           '</span>'+
+	                           '&nbsp;<a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>'+
+	                        '</div>'+
+	                     '</div>'+
+	                   '</div>'
+	                   $('#field_container').append(fieldRow)
+		}		
+	})
+</script>
+
+<script>
+   jQuery(document).ready(function() {       
+      // initiate layout and plugins
+      App.init();      
+   });
+</script>
+
+<% end %>

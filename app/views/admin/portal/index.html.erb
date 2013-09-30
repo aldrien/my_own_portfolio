@@ -1,0 +1,295 @@
+<% content_for :content do %>
+<!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+<div id="portlet-config" class="modal hide">
+	<div class="modal-header">
+		<button data-dismiss="modal" class="close" type="button"></button>
+		<h3>Widget Settings</h3>
+	</div>
+	<div class="modal-body">
+		<p>Here will be a configuration form</p>
+	</div>
+</div>
+<!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+<!-- BEGIN PAGE CONTAINER-->
+<div class="container-fluid">
+	<!-- BEGIN PAGE HEADER-->
+	<div class="row-fluid">
+		<div class="span12">
+			 
+			 <!-- <div class="color-panel hidden-phone">
+                     <div class="color-mode-icons icon-color"></div>
+                     <div class="color-mode-icons icon-color-close"></div>
+                     <div class="color-mode">
+                        <p>THEME COLOR</p>
+                        <ul class="inline">
+                           <li class="color-black current color-default" data-style="default"></li>
+                           <li class="color-blue" data-style="blue"></li>
+                           <li class="color-brown" data-style="brown"></li>
+                           <li class="color-purple" data-style="purple"></li>
+                           <li class="color-white color-light" data-style="light"></li>
+                        </ul>
+                     </div>
+                  </div> -->
+			 
+			 
+			<!-- BEGIN PAGE TITLE & BREADCRUMB-->			
+			<h3 class="page-title">
+				<%=t :dashboard %>				
+				<small><%=t :statistics_and_more %></small>
+			</h3>
+			<ul class="breadcrumb">
+				<li>
+					<i class="icon-home"></i>
+					<a href="/admin"><%=t :home %></a> 
+					<i class="icon-angle-right"></i>
+				</li>
+				<li><a href="/admin"><%=t :dashboard %></a></li>
+				<li class="pull-right no-text-shadow">
+					<div id="dashboard-report-range" class="dashboard-date-range tooltips no-tooltip-on-touch-device responsive" data-tablet="" data-desktop="tooltips" data-placement="top" data-original-title="Change dashboard date range">
+						<i class="icon-calendar"></i>
+						<span></span>
+						<!-- <i class="icon-angle-down"></i> -->
+					</div>
+				</li>
+			</ul>
+			<!-- END PAGE TITLE & BREADCRUMB-->
+		</div>
+	</div>
+	<!-- END PAGE HEADER-->
+	<div id="dashboard">
+		<!-- BEGIN DASHBOARD STATS -->
+		<div class="row-fluid">
+			<div class="span3 responsive" data-tablet="span6" data-desktop="span3">
+				<div class="dashboard-stat blue">
+					<div class="visual">
+						<i class="icon-comments"></i>
+					</div>
+					<div class="details">
+						<div class="number">
+							0
+						</div>
+						<div class="desc">									
+							Enquries
+						</div>
+					</div>
+					<a class="more" href="index.html#">
+					View more <i class="m-icon-swapright m-icon-white"></i>
+					</a>						
+				</div>
+			</div>
+			<div class="span3 responsive" data-tablet="span6" data-desktop="span3">
+				<div class="dashboard-stat green">
+					<div class="visual">
+						<i class="icon-tasks"></i>
+					</div>
+					<div class="details">
+						<div class="number"><%= @active_banner.count %></div>
+						<div class="desc">Active Banner</div>
+					</div>
+					<a class="more" href="#">
+					View more <i class="m-icon-swapright m-icon-white"></i>
+					</a>						
+				</div>
+			</div>
+			<div class="span3 responsive" data-tablet="span6  fix-offset" data-desktop="span3">
+				<div class="dashboard-stat purple">
+					<div class="visual">
+						<i class="icon-credit-card"></i>
+					</div>
+					<div class="details">
+						<div class="number"><%= @portfolios.count %></div>
+						<div class="desc">Portfolios</div>
+					</div>
+					<a class="more" href="index.html#">
+					View more <i class="m-icon-swapright m-icon-white"></i>
+					</a>						
+				</div>
+			</div>
+			<div class="span3 responsive" data-tablet="span6" data-desktop="span3">
+				<div class="dashboard-stat yellow">
+					<div class="visual">
+						<i class="icon-bar-chart"></i>
+					</div>
+					<div class="details">
+						<div class="number"><%= @strength_category %> / <%= @strength %></div>
+						<div class="desc">Category / Strength</div>
+					</div>
+					<a class="more" href="index.html#">
+					View more <i class="m-icon-swapright m-icon-white"></i>
+					</a>						
+				</div>
+			</div>
+		</div>
+		<!-- END DASHBOARD STATS -->
+		
+		<div class="clearfix"></div>
+		<div class="row-fluid" ><!-- style="border-left: 2px solid #ddd;" -->
+			<div class="span6">
+				<div class="portlet paddingless">
+					<div class="portlet-title line">
+						<h4><i class="icon-globe"></i> Regional Stats</h4>
+					</div>
+					<div class="portlet-body" style="margin-right: -50px;">
+						<iframe marginwidth="0"   frameborder="0"  marginheight="0" width="580" height="350" src="http://www.embeddedanalytics.com/reports/displayreport?reportcode=hMInanfr6x&chckcode=gaRm41ooFudMJUR8yCblId" type="text/html"  scrolling="no" title="EmbeddedAnalytics - Embed Realtime Google Analytics Charts into your Website!"></iframe>
+					</div>
+				</div>
+			</div>
+			
+			<div class="span6">
+				<div class="portlet paddingless">
+					<div class="portlet-title line">
+						<h4><i class="icon-bell"></i> Feeds</h4>
+						<!-- <div class="tools">
+							<a href="javascript:;" class="collapse"></a>
+							<a href="index.html#portlet-config" data-toggle="modal" class="config"></a>
+							<a href="javascript:;" class="reload"></a>
+						</div> -->
+					</div>
+					<div class="portlet-body">
+						<!--BEGIN TABS-->
+						<div class="tabbable tabbable-custom">
+							<ul class="nav nav-tabs">
+								<li class="active"><a href="index.html#tab_1_1" data-toggle="tab">Recent Users</a></li>
+								<li><a href="index.html#tab_1_2" data-toggle="tab">Activities</a></li>
+								<!-- <li><a href="index.html#tab_1_3" data-toggle="tab">System</a></li> -->
+							</ul>
+							<div class="tab-content">
+								<div class="tab-pane active" id="tab_1_1">
+									<div class="scroller" data-height="290px" data-always-visible="1" data-rail-visible1="1">
+										<% for u in @recent_users %>
+											<div class="row-fluid">
+												<div class="span6 user-info">
+													<% unless u.image_file_name.nil? %>
+														<%= image_tag u.image.url(:thumb), :style => "width:30px; border: 1px solid grey;" %>
+													<% else %>
+														<img alt="" src="/assets/admin/no_profile_image.jpg" style="width: 30px;" />
+													<% end %>
+													<div class="details">
+														<div>
+															<a href="#" >	
+																<%= u.first_name %>&nbsp; <%= u.last_name %>
+															</a> 
+															<!-- <span class="label label-success">Approved</span> -->
+														</div>
+														<div>
+															<%= u.role %>
+														</div>
+														
+													</div>
+												</div>
+												<div class="span6 user-info">
+													<div class="details">
+														<div>
+															<i style="color: #0d638f;">Last login at:</i>
+														</div>
+														<div>
+															<% unless u.last_login_at.nil? %>
+																<%= time_ago_in_words(u.last_login_at) %><!-- %e %b %Y %H:%m:%S %p -->
+															<% end %>
+														</div>
+													</div>
+												</div>
+											</div>
+										<% end %>
+									</div>
+								</div>
+								<div class="tab-pane" id="tab_1_2">
+									<div class="scroller" data-height="290px" data-always-visible="1" data-rail-visible1="1">
+										
+									</div>
+								</div>
+								<div class="tab-pane" id="tab_1_3">
+									<div class="scroller" data-height="290px" data-always-visible="1" data-rail-visible1="1">
+										<ul class="feeds">
+											<li>
+												<div class="col1">
+													<div class="cont">
+														<div class="cont-col1">
+															<div class="label label-success">								
+																<i class="icon-bell"></i>
+															</div>
+														</div>
+														<div class="cont-col2">
+															<div class="desc">
+																You have 4 pending tasks.
+																<span class="label label-important label-mini">
+																Take action 
+																<i class="icon-share-alt"></i>
+																</span>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="col2">
+													<div class="date">
+														Just now
+													</div>
+												</div>
+											</li>
+											
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--END TABS-->
+					</div>
+				</div>
+				<!-- END PORTLET-->
+			</div>
+			
+		</div>
+		
+		<div class="clearfix"></div>
+		
+	</div>
+</div>
+<% end %>
+
+<% content_for :page_level_styles do %>
+<link href="/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet" type="text/css" />
+<link href="/plugins/fullcalendar/fullcalendar/fullcalendar.css" rel="stylesheet" type="text/css"/>
+<link href="/plugins/jqvmap/jqvmap/jqvmap.css" rel="stylesheet" type="text/css" media="screen"/>
+<link href="/plugins/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen"/>
+<% end %>
+
+
+<% content_for :page_level_plugins do %>
+<script src="/plugins/jqvmap/jqvmap/jquery.vmap.js" type="text/javascript"></script>   
+<script src="/plugins/jqvmap/jqvmap/maps/jquery.vmap.russia.js" type="text/javascript"></script>
+<script src="/plugins/jqvmap/jqvmap/maps/jquery.vmap.world.js" type="text/javascript"></script>
+<script src="/plugins/jqvmap/jqvmap/maps/jquery.vmap.europe.js" type="text/javascript"></script>
+<script src="/plugins/jqvmap/jqvmap/maps/jquery.vmap.germany.js" type="text/javascript"></script>
+<script src="/plugins/jqvmap/jqvmap/maps/jquery.vmap.usa.js" type="text/javascript"></script>
+<script src="/plugins/jqvmap/jqvmap/data/jquery.vmap.sampledata.js" type="text/javascript"></script>  
+<script src="/plugins/flot/jquery.flot.js" type="text/javascript"></script>
+<script src="/plugins/flot/jquery.flot.resize.js" type="text/javascript"></script>
+<script src="/plugins/jquery.pulsate.min.js" type="text/javascript"></script>
+<script src="/plugins/bootstrap-daterangepicker/date.js" type="text/javascript"></script>
+<script src="/plugins/bootstrap-daterangepicker/daterangepicker.js" type="text/javascript"></script>     
+
+<script src="/plugins/fullcalendar/fullcalendar/fullcalendar.min.js" type="text/javascript"></script>
+<script src="/plugins/jquery-easy-pie-chart/jquery.easy-pie-chart.js" type="text/javascript"></script>
+<script src="/plugins/jquery.sparkline.min.js" type="text/javascript"></script>  
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<% end %>
+
+<% content_for :page_level_scripts do %>
+<script>
+   jQuery(document).ready(function() {    
+      App.init(); // initlayout and core plugins
+      Index.init();
+      //Index.initJQVMAP(); // init index page's custom scripts
+      Index.initCalendar(); // init index page's custom scripts
+      Index.initCharts(); // init index page's custom scripts
+      Index.initChat();
+      Index.initMiniCharts();
+      Index.initDashboardDaterange();
+      Index.initIntro();
+      
+   });
+</script>
+
+ 
+   
+<% end %>

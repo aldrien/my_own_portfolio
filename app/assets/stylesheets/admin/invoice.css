@@ -1,0 +1,83 @@
+
+.lingao{
+	font-family: 'RalewayThin', 'Segoe UI', Helvetica, Arial, sans-serif;
+	font-size: 38px;
+	color: #70a3d8;
+	padding-top: 30px;
+	vertical-align: top;
+	padding-left: 15px;
+}
+
+@media print {
+  html body {
+    background-color: #fff;
+	font-family: 'Open Sans';
+	font-size: 12px;
+  }
+
+  #container {
+    width: auto;
+    margin: 0;
+    padding: 0;
+    border: none;
+  }
+  
+  #line_items {
+    page-break-before: always;
+  }
+  
+  #pdf_link {
+    display: none;
+  }
+  
+  #div_body_color{
+  	background-color: #fff;
+  }
+  
+  #main_header{
+  	display: none;
+  }
+  #main_footer{
+  	display: none;
+  }
+  
+  #page_header{
+  	display: none;
+  }
+  
+  #invoice_details{
+  	display: none;
+  	background-color: #fff !important;
+  }
+  
+  #div_portlet{
+  	background-color: #fff !important;
+  	border: none;
+  }
+  
+  #div_tools{
+  	display: none;
+  }
+  
+  #invoice_container{
+  	background-color: #fff;
+  }
+  
+  #sidebar_container{
+	background-color: #fff !important;
+  }
+  
+  #sidebar_container_collapsible{
+  	display: none;
+  }
+  /*.page-sidebar .sidebar-search input{
+	  background-color: #ffffff !important;
+	  color: #bababa !important;
+	}*/
+  #lingao{
+		/*color: #70a3d8 !important;*/
+		color: #4b8df8 !important;
+		font-family: 'RalewayThin', 'Segoe UI', Helvetica, Arial, sans-serif;
+		font-size: 38px;
+	}
+}

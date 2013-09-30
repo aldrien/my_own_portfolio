@@ -1,0 +1,161 @@
+<% content_for :main_body do %>
+<style type="text/css">
+	.h2_title{
+		margin-top: -3px;
+	}
+	.p_description{
+		margin-top: -15px;
+	}
+	.education.primary {
+		background: #04b0f8;
+	}
+	.education.secondary {
+		background: #0da3e2;
+	}
+	.education.tertiary {
+		background: #0292ce;
+	}
+	.education h2 {
+		color: #f0f0f0;
+		font-size: 22px;
+	}
+	.education p {
+		color: #fff;
+		font-size: 14px;
+		line-height: 18px;
+		margin-bottom: 0;
+	}
+	.education {
+		padding: 15px 20px 0px 40px;
+	}
+	.quote-msg {
+		background: url("/assets/quote_mark.png") no-repeat transparent;
+		border: 0 solid #DDDDDD;
+		font-style: italic;
+		margin: 1em 1.5em;
+		padding: 1em 1em 1em 3em;
+	}
+	.service-box .service-box-heading {
+		padding: 12px 0;
+	}
+	.service-box .service-box-heading span {
+	color: #444;
+	font-size: 21px;
+	line-height: 25px;
+	font-weight: 400;
+	margin-bottom: 10px;
+	margin-left: 10px;
+	display: inline-block;
+	}
+	.check_icon{
+		background-image: url('/assets/img/check_icon.png'); width: 30px; height: 30px; float: left;
+		
+	}
+</style>
+
+
+<div style="border-bottom: 1px solid #FEFEFE;" class="block-grey" >
+	<div class="container">
+		<div class="row-fluid">
+			<div class="row-fluid recent-work margin-bottom-40" >
+				
+				<div class="span6" style="">
+		            <h2><a href="/portfolio">&nbsp;&nbsp;About Me</a></h2>
+		            <p class="quote-msg">
+		            	A good programmer is someone who always looks both ways before crossing a one-way street.
+		            	<br />
+		            	 - Doug Linder
+		            </p>
+			        <p class="quote-msg">
+			        	It’s art if can’t be explained. It’s fashion if no one asks for an explanation. It’s design if it doesn’t need explanation.
+						— Wouter Stokkel.
+					</p>
+					<p class="quote-msg">
+						Design is the method of putting form and content together. Design, just as art, has multiple definitions; there is no single definition. Design can be art. Design can be aesthetics. Design is so simple, that's why it is so complicated.
+						— Paul Rand
+					</p>
+			    </div>
+			    <div class="span6">
+			        <p align="justify" style="line-height: 20px; font-size: 13px; margin-top: 15%;">
+			        	<%= raw(@about.content) %>
+			        </p>
+			    </div>
+			    
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="block-transparent">
+ <div class="container">
+ 	
+ 	 <div class="row-fluid service-box">
+            <div class="span4">
+                <div class="service-box-heading">
+                    <span>Passion</span>
+                	<span class="check_icon"></span>
+                </div>
+                <p>Passion is not just about loving what you are doing, but also accepting the possible ups and downs may encounter in the long run.
+               		
+               	</p>
+            </div>
+            <div class="span4">
+                <div class="service-box-heading">
+                    <span>Initiative</span>
+                    <span class="check_icon"></span>
+                </div>
+                <p>
+                	Initiative is doing the right thing without being told.<br />
+                	It is the power or ability to begin or to follow a plan or task with energy and determination.
+                </p>
+            </div>
+            <div class="span4">
+                <div class="service-box-heading">
+                    <span>Goal</span>
+                    <span class="check_icon"></span>
+                </div>
+                <p>Goal is a set of objectives that we are aiming to be or have in life.
+                	This will be the outcome or achievement due to our efforts and hardworks.
+                	It is our plan towards the point in our journey.
+                </p>
+            </div>
+        </div>
+        
+ 	<div style="margin-bottom: 30px;"></div>
+ 		
+	<div class="row-fluid recent-work margin-bottom-20">
+		
+		<div class="row-fluid quote-v1">
+		    <div class="span9 quote-v1-inner">
+		        <span>Educational Background</span>
+		    </div>
+		</div>	
+		
+		
+		<div style="margin-top: 20px;"></div>    
+        <div class="row-fluid no-space-steps">
+		        <div style="height: 145px;" class="span4 education primary">
+		            <h2 class="h2_title">Primary</h2>
+		            <p class="p_description">Kalaklan Elementary School</p>
+		            <p>A.Y 1998 - 2004</p>
+		        </div>
+		        <img src="/assets/arrow_white.png" style="position: absolute; float: left; margin-left: 0px; margin-top: 45px;" />
+		        <div style="height: 145px;" class="span4 education secondary">
+		            <h2 class="h2_title">Secondary</h2>
+		            <p class="p_description">Olongapo City National High School</p>
+		            <p>A.Y 2004 - 2008</p>
+		        </div>
+		        <img src="/assets/arrow_white.png" style="position: absolute; float: left; margin-left: 0px; margin-top: 45px;" />
+		        <div style="height: 145px;" class="span4 education tertiary">
+		            <h2 class="h2_title">Tertiary</h2>
+		            <p class="p_description">Mondriaan Aura College</p>
+		            <p>A.Y 2008 - 2012</p>
+		        </div>
+		    </div>
+			
+	</div>
+ </div>
+  </div>
+
+<% end %>

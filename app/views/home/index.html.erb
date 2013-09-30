@@ -1,0 +1,125 @@
+<% content_for :content do %>
+<div class="block-transparent" style="border-bottom: 1px solid #FEFEFE !important;" >
+     <div class="container">
+        <div id="promo_carousel" class="carousel slide">
+           <div class="carousel-inner">
+           	<% ctr = 3 %>
+           	
+           	<% for b in @banner %>
+    	      <% ctr = ctr % 2 %>
+		          <% if ctr == 1 %> 	
+		              <div class="<% if b.display_order == 1 %>active<% end %> item">
+		                 <div class="row-fluid">
+		                    <div class="span7 margin-bottom-20 margin-top-20 animated rotateInUpRight">
+		                       <h1><%= b.title %></h1>
+		                       <p><%= raw(b.content) %></p>
+		                       <a href="#about_mr_hate" class="btn red big medium">
+		                       Read more...
+		                       <i class="m-icon-big-swapright m-icon-white"></i>                              
+		                       </a>
+		                    </div>
+		                    <div class="span5 animated rotateInDownLeft">
+		                    	<% unless b.banner_file_name.nil? %>
+		                       		<%= image_tag b.banner.url(:large) %>
+		                       	<% end %>
+		                    </div>
+		                 </div>
+		              </div>
+		            <% else %>
+		            	<div class="item">
+			                 <div class="row-fluid">
+			                    <div class="span5 animated rotateInUpRight">
+			                       <%= image_tag b.banner.url(:large) %>
+			                    </div>
+			                    <div class="span7 margin-bottom-20 animated rotateInDownLeft">
+			                       <h1><%= b.title %></h1>
+			                       <p><%= raw(b.content) %></p>
+			                       <a href="#" class="btn green big xlarge">
+			                       Read more...
+			                       <i class="m-icon-big-swapright m-icon-white"></i>                                
+			                       </a>
+			                    </div>
+			                 </div>
+			              </div>
+			        <% end %>
+			        <% ctr = ctr + 1 %>
+             <% end %> 
+           </div>
+           
+           <a class="carousel-control left" href="#promo_carousel" data-slide="prev">
+           <i class="m-icon-big-swapleft m-icon-white"></i>
+           </a>
+           <a class="carousel-control right" href="#promo_carousel" data-slide="next">
+           <i class="m-icon-big-swapright m-icon-white"></i>
+           </a>
+        </div>
+     </div>
+  </div>
+  
+
+  
+  <div id="about_mr_hate" style="border-bottom: 1px solid #FEFEFE; border-top: 1px solid #FEFEFE;" class="block-grey">
+     <div class="container">
+        <div class="row-fluid">
+           <div class="span5 margin-bottom-20">
+              <a href="#"><%= image_tag @about_me.image.url(:large)%></a>
+           </div>
+           <div class="span7">
+              <h2><%= @about_me.title %></h2>
+              <p align="justify">
+              	<%= raw(@about_me.content)%>
+              	
+              </p>
+              <a href="about_me" class="btn blue big xlarge">
+              Read more...
+              <i class="m-icon-big-swapright m-icon-white"></i>                                
+              </a>
+           </div>
+        </div>
+     </div>
+  </div>
+  <div class="block-transparent">
+     <div class="container">
+        <div class="row-fluid margin-bottom-20">
+           <div class="span6 margin-bottom-20">
+              <h2>News & Updates 1</h2>
+              <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos ellentesque la vehi dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique. Pellentesque viverra vehicula sem ut volutpat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut non libero magna. Sed et quam lacus. Fusce condimentum eleifend enim a feugiat.</p>
+              <p>Lunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              	 Ut non libero consectetur adipiscing elit magna. Sed et quam lacus.
+              	  Fusce condimentum eleifend enim a feugiat.</p>
+              	  <p><a href="">Read more...</a></p>
+           </div>
+           <div class="span6 margin-bottom-20">
+              <a href="#"><img src="assets/img/pages/img3.png" alt=""></a>
+           </div>
+        </div>
+        
+        <hr>
+        <div class="row-fluid">
+        	<div class="span3">
+              <h3><a href="#">News A</a></h3>
+              <p>Lunt in lpa qui officia deserunt mollitia mo animi, asdid leoff iscia est labor le harum quidem rerum facilis</p>
+           	  <p><a href="">Read more...</a></p>
+           </div>
+           <div class="span3">
+              <h3><a href="#">News B</a></h3>
+              <p>Lunt in lpa qui officia deserunt mollitia mo animi, asdid leoff iscia est labor le harum quidem rerum facilis</p>
+           	  <p><a href="">Read more...</a></p>
+           </div>
+           <div class="span3">
+              <h3><a href="#">News C</a></h3>
+              <p>Volutpat dosum esque viverra ved et quam lacusehicula sem ut  molorviverra sit amet, consetetur edipiscin la</p>
+           	  <p><a href="">Read more...</a></p>
+           </div>
+           <div class="span3">
+              <h3><a href="#">News D</a></h3>
+              <p>Deleniti atque corrupa vehicula sem ut volutpat dosum molor sit amet, consectetur adipiscing praesentium</p>
+          	  <p><a href="">Read more...</a></p>
+           </div>
+        </div>
+        
+        
+        
+     </div>
+  </div>
+<% end %>

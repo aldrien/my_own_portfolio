@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+<!-- BEGIN HEAD -->
+<head>
+   <meta charset="utf-8" />
+   <title>Mr. Hate | Admin</title>
+   <meta http-equiv="X-UA-Compatible" content="IE=9">
+   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"/>
+   <meta content="" name="description" />
+   <meta content="" name="author" />
+
+	<meta content="0.2in" name="pdfkit-margin_top" />
+	<meta content="0.1in" name="pdfkit-margin_bottom" />
+	<meta content="0.1" name="pdfkit-header-spacing" />
+	<meta content="Letter" name="pdfkit-page-size" />
+	<%= csrf_meta_tag %>
+	
+   <!-- BEGIN GLOBAL MANDATORY STYLES -->
+   <link href="/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+   <link href="/plugins/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css"/>
+   <link href="/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+   <%= javascript_include_tag '/assets/ckeditor/ckeditor'%>
+   <%= stylesheet_link_tag "admin/application", :media => 'all' %>
+   <link href="/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css"/>
+   <!-- <link rel="stylesheet" type="text/css" href="/assets/admin/invoice.css" media="all"/>  -->
+   <link rel="stylesheet" type="text/css" href="/plugins/jquery-ui/jquery-ui-1.10.1.custom.min.css" />
+   <!-- END GLOBAL MANDATORY STYLES -->
+   
+   <%= stylesheet_link_tag 'admin/jquery.tipsy.css' %>
+	<%= stylesheet_link_tag 'admin/jquery.wysiwyg.css' %>
+	<%= stylesheet_link_tag 'admin/jquery.facebox.css' %>
+	<%= stylesheet_link_tag 'admin/jquery.datatables.css' %>
+   
+   <%= yield(:page_level_styles) %>    
+   
+   <link rel="shortcut icon" href="/assets/favicon.ico" />
+   <style>
+   	.selected_arrow{
+   		display: block;
+		width: 8px;
+		height: 25px;
+		background-image: url("/assets/admin/sidebar-menu-arrow.png");
+		float: right;
+		position: absolute;
+		right: -1px;
+		top: 8px;
+   	}
+   </style>
+</head>
+
+<body class="fixed-top">
+   <div class="header navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+         <div class="container-fluid">
+            <!-- BEGIN LOGO -->
+            <a class="brand" href="/">
+            <img id="lingao_main_logo" src="/assets/hate2.png" alt="logo" style="max-width: 80px;" />
+            </a>
+            <!-- END LOGO -->
+            <!-- BEGIN RESPONSIVE MENU TOGGLER -->
+            <a href="javascript:;" class="btn-navbar collapsed" data-toggle="collapse" data-target=".nav-collapse">
+            <img src="/assets/admin/menu-toggler.png" alt="" />
+            </a>          
+            <!-- END RESPONSIVE MENU TOGGLER -->            
+            <!-- BEGIN TOP NAVIGATION MENU -->              
+            <ul class="nav pull-right">
+               <li class="dropdown" id="header_inbox_bar">
+                  <a href="/" class="dropdown-toggle" data-toggle="dropdown">
+                  <i class="icon-envelope-alt"></i>
+                  <span class="badge">0</span>
+                  </a>
+                  <ul class="dropdown-menu extended inbox">
+                     <li>
+                        <p>You have 0 new message/s</p>
+                     </li>
+                     <li class="external">
+                        <a href="/admin">See all messages <i class="m-icon-swapright"></i></a>
+                     </li>
+                  </ul>
+               </li>
+               <!-- END INBOX DROPDOWN -->
+               <!-- BEGIN TODO DROPDOWN -->
+               <li class="dropdown" id="header_task_bar">
+                  <a href="/admin" class="dropdown-toggle" data-toggle="dropdown">
+                  <i class="icon-tasks"></i>
+                  <span class="badge">0</span>
+                  </a>
+                  <ul class="dropdown-menu extended tasks">
+                     <li>
+                        <p>You have 0 pending task/s</p>
+                     </li>
+                     <li class="external">
+                        <a href="/admin">See all tasks <i class="m-icon-swapright"></i></a>
+                     </li>
+                  </ul>
+               </li>
+               <!-- END TO DO DROPDOWN -->
+               <!-- BEGIN USER LOGIN DROPDOWN -->
+               <li class="dropdown user">
+                  <a href="/admin" class="dropdown-toggle" data-toggle="dropdown">
+                  <% @user = User.where(:id => session[:admin_user]).first %>
+                  <% unless @user.image_file_name.nil? %>
+	            		<img id="profile_pic" src="<%= @user.image.url(:thumb) %>" style="width: 30px;" alt="" />
+	              <% else %>
+	            		<img src="/assets/admin/no_profile_image.jpg" alt="" width="25px" />
+	              <% end %>
+	              
+	              
+                  <span class="username"><%= session[:first_name] %> <%= session[:last_name] %></span>
+                  <i class="icon-angle-down"></i>
+                  </a>
+                  <ul class="dropdown-menu">
+                     <li><a href="#"><i class="icon-user"></i> Account</a></li>
+                     <li><a href="#"><i class="icon-calendar"></i> Calendar</a></li>
+                 	 <li><a href="#"><i class="icon-envelope"></i> Enquiries (0)</a></li>
+                     <li><a href="#"><i class="icon-tasks"></i> Task</a></li>
+                     <li class="divider"></li>
+                     <li><a href="/admin/logout"><i class="icon-key"></i> <%=t :logout %></a></li>
+                  </ul>
+                 
+               </li>
+            </ul>
+            <!-- END TOP NAVIGATION MENU --> 
+         </div>
+      </div>
+      <!-- END TOP NAVIGATION BAR -->
+   </div>
+   <!-- END HEADER -->
+   <!-- BEGIN CONTAINER -->
+   <div class="page-container" >
+      <!-- BEGIN SIDEBAR -->
+      <div  class="page-sidebar nav-collapse collapse">
+      	
+         <!-- BEGIN SIDEBAR MENU -->        	
+		 <ul>
+				<li>
+					<div class="sidebar-toggler hidden-phone">
+						<img src="/assets/admin/sidebar-toggler-light.jpg" />
+					</div>
+				</li>
+				<li>
+					<br />
+					<!-- <form class="sidebar-search">
+						<div class="input-box">
+							<a href="javascript:;" class="remove"></a>
+							<input type="text" placeholder="Search..." />				
+							<input type="button" class="submit" value=" " />
+						</div>
+					</form> -->
+				</li>
+				
+                	        		
+        		<li class="<% if @menu == 'Dashboard' %>start active<% end %>">
+        			<a href="/admin">
+					<i class="icon-home"></i> 
+					<span class="title">Dashboard</span>
+					<span class="<% if @menu == 'Dashboard' %>selected_arrow<% end %>"></span>
+					</a>
+
+				</li>
+        		
+        		<li class="<% if @menu == 'Banner' %>active<% end %>" >
+        			<a href="javascript:;">
+						<i class="icon-credit-card"></i> 
+						<span class="title">Banners</span>
+						<span class="arrow <% if @menu == 'Banner' %>open<% end %>"></span>
+						<span class="<% if @menu == 'Banner' %>selected_arrow<% end %>"></span>
+					</a>
+					<ul class="sub-menu">						
+						<li class="<% if @submenu_banner == 'index' %>active<% end %>"><%= link_to "List of Banners", admin_banners_path %></li>
+						<li class="<% if @submenu_banner == 'create' %>active<% end %>"><%= link_to "Create Banner", new_admin_banner_path %></li>
+					</ul>
+				</li>
+        		
+        		<li class="<% if @menu == 'User' %>active<% end %>" >
+        			<a href="javascript:;">
+						<i class="icon-user"></i> 
+						<span class="title">Users</span>
+						<span class="arrow <% if @menu == 'User' %>open<% end %>"></span>
+						<span class="<% if @menu == 'User' %>selected_arrow<% end %>"></span>
+					</a>
+					<ul class="sub-menu">						
+						<li class="<% if @submenu_membership == 'index' %>active<% end %>"><%= link_to "List of All Users", admin_users_path %></li>
+						<li class="<% if @submenu_membership == 'create' %>active<% end %>"><%= link_to "Create User", new_admin_user_path %></li>
+					</ul>
+				</li>
+				
+				<li class="<% if @menu == 'Gallery' %>active<% end %>" >
+        			<a href="javascript:;">
+						<i class="icon-picture"></i> 
+						<span class="title">Gallery</span>
+						<span class="arrow <% if @menu == 'Gallery' %>open<% end %>"></span>
+						<span class="<% if @menu == 'Gallery' %>selected_arrow<% end %>"></span>
+					</a>
+					<ul class="sub-menu">						
+						<li class="<% if @submenu_album == 'index' %>active<% end %>"><%= link_to "List of All Albums", admin_albums_path %></li>
+						<li class="<% if @submenu_album == 'create' %>active<% end %>"><%= link_to "Create Album", new_admin_album_path %></li>
+						<!-- <li class="<#% if @submenu_gallery_image == 'index' %>active<#% end %>"><#%= link_to "List of Gallery Images ", admin_gallery_images_path %></li>
+						<li class="<#% if @submenu_gallery_image == 'create' %>active<#% end %>"><#%= link_to "Create Gallery Images", new_admin_gallery_image_path %></li> -->
+					</ul>
+				</li>
+				
+				<li class="<% if @menu == 'Portfolio' %>active<% end %>" >
+        			<a href="javascript:;">
+						<i class="icon-list-alt"></i> 
+						<span class="title">Portfolio</span>
+						<span class="arrow <% if @menu == 'Portfolio' %>open<% end %>"></span>
+						<span class="<% if @menu == 'Portfolio' %>selected_arrow<% end %>"></span>
+					</a>
+					<ul class="sub-menu">						
+						<li class="<% if @submenu_portfolio == 'index' %>active<% end %>"><%= link_to "List of All Portfolio", admin_portfolios_path %></li>
+						<li class="<% if @submenu_portfolio == 'create' %>active<% end %>"><%= link_to "Create Portfolio", new_admin_portfolio_path %></li>
+					</ul>
+				</li>
+				
+				<li class="<% if @menu == 'Page' %>active<% end %>" >
+        			<a href="javascript:;">
+						<i class="icon-folder-open"></i> 
+						<span class="title">Pages</span>
+						<span class="arrow <% if @menu == 'Page' %>open<% end %>"></span>
+						<span class="<% if @menu == 'Page' %>selected_arrow<% end %>"></span>
+					</a>
+					<ul class="sub-menu">						
+						<li class="<% if @submenu_page == 'index' %>active<% end %>"><%= link_to "List of All Page", admin_pages_path %></li>
+						<li class="<% if @submenu_page == 'create' %>active<% end %>"><%= link_to "Create Page", new_admin_page_path %></li>
+					</ul>
+				</li>
+				
+				<li class="<% if @menu == 'Strength' %>active<% end %>" >
+        			<a href="javascript:;">
+						<i class="icon-bolt"></i> 
+						<span class="title">Strengths</span>
+						<span class="arrow <% if @menu == 'Strength' %>open<% end %>"></span>
+						<span class="<% if @menu == 'Strength' %>selected_arrow<% end %>"></span>
+					</a>
+					<ul class="sub-menu">						
+						<li class="<% if @submenu_strength == 'index' %>active<% end %>"><%= link_to "List of Strengths", admin_strengths_path %></li>
+						<li class="<% if @submenu_strength == 'create' %>active<% end %>"><%= link_to "Create Strength", new_admin_strength_path %></li>
+					</ul>
+				</li>
+				
+				
+				
+				<li class="<% if @menu == 'Settings' %>active<% end %>">
+					<a href="javascript:;">
+						<i class="icon-cogs"></i> 
+						<span class="title">Settings</span>
+						<span class="arrow <% if @menu == 'Settings' %>open<% end %>"></span>
+						<span class="<% if @menu == 'Settings' %>selected_arrow<% end %>"></span>
+					</a>
+					<ul class="sub-menu">
+						<li class="<% if @submenu_portfolio_type == 'Portfolio Type' %>active<% end %>"><%= link_to "Portfolio Type", admin_portfolio_types_path %></li>
+					</ul>
+				</li>
+			</ul>
+		<!-- END SIDEBAR MENU -->
+      </div>
+      
+      <div class="page-content">
+	  	<%= yield(:content) %>
+	  </div>
+   
+   </div>
+   
+   <div class="footer">
+      2013 &copy; Mr. Hate
+      <div class="span pull-right">
+         <span class="go-top"><i class="icon-angle-up"></i></span>
+      </div>
+   </div>
+   
+   <%= javascript_include_tag "jquery", "jquery_ujs", "jquery-migrate-1.2.1.min" %> 
+   <script src="/plugins/jquery-1.8.3.min.js" type="text/javascript"></script>  
+   <script type="text/javascript" src="/assets/admin/scripts/ui-jqueryui.js"></script>   
+   <!-- IMPORTANT! Load jquery-ui-1.10.1.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->  
+   <script src="/plugins/jquery-ui/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>      
+   <script src="/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+   <!--[if lt IE 9]>
+   <script src="assets/plugins/excanvas.js"></script>
+   <script src="assets/plugins/respond.js"></script>  
+   <![endif]-->   
+   <script src="/plugins/breakpoints/breakpoints.js" type="text/javascript"></script>  
+   <!-- IMPORTANT! jquery.slimscroll.min.js depends on jquery-ui-1.10.1.custom.min.js --> 
+   <script src="/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+   <script src="/plugins/jquery.blockui.js" type="text/javascript"></script>  
+   <script src="/plugins/jquery.cookie.js" type="text/javascript"></script>
+   <script src="/plugins/uniform/jquery.uniform.min.js" type="text/javascript" ></script> 
+   <script src="/ckeditor/ckeditor.js" type="text/javascript"></script>
+
+   <%= yield(:page_level_plugins) %>      
+   
+   <%= javascript_include_tag 'ckeditor/ckeditor' %>
+   <%= javascript_include_tag "admin/application" %>  
+   
+   <%= yield(:page_level_scripts) %>      
+   
+   
+   <%= javascript_include_tag 'admin/js/script.js' %>
+   <%= javascript_include_tag 'admin/js/jquery.datatables.js' %>
+   <%= javascript_include_tag 'admin/js/jquery.facebox.js' %>
+   <%= javascript_include_tag 'admin/js/jquery.tipsy.js' %>
+   <%= javascript_include_tag 'admin/js/jquery.wysiwyg.js' %>
+
+</body>
+</html>

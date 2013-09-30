@@ -1,0 +1,130 @@
+<% content_for :content do %>
+<div class="container-fluid">
+   <!-- BEGIN PAGE HEADER-->   
+   <div class="row-fluid">
+      <div class="span12">
+  
+         <h3 class="page-title">
+            <%=t :locale_management_tables %>
+         </h3>
+         <ul class="breadcrumb">
+            <li>
+               <i class="icon-home"></i>
+               <a href="/admin">Dashboard</a> 
+               <span class="icon-angle-right"></span>
+            </li>
+            <li>
+               <a href="/admin/strengths">Strengths</a>
+               <span class="icon-angle-right"></span>
+            </li>
+            <li><a href="#">Create Strength</a></li>
+         </ul>
+      </div>
+   </div>
+   <!-- END PAGE HEADER-->
+   <!-- BEGIN PAGE CONTENT-->
+   <div class="row-fluid">
+      <div class="span12">
+         <!-- BEGIN SAMPLE FORM PORTLET-->   
+         <div class="portlet box blue">
+            <div class="portlet-title">
+               <h4><i class="icon-reorder"></i> Edit Strength</h4>
+            </div>
+            <div class="portlet-body form">
+               <!-- BEGIN FORM-->
+				 <%= display_validation_errors(@strength) %>
+				   <%= form_for(@strength, :as => :strength, :validate => true, :url => admin_strength_path, :html => {:class => "form-horizontal"}) do |f| %>                    
+                  
+                  <div class="control-group">
+                     <label class="control-label">Title</label>
+                     <div class="controls">
+						<%= f.text_field :title, :class => 'span6 m-wrap popovers', "data-trigger" => "hover", "data-content" => "Strength Title", "data-original-title" => "Information"  %>  
+                     </div>
+                  </div>
+                 
+                 <div class="control-group">
+                     <label class="control-label">Description</label>
+                     <div class="controls">
+						<%= f.text_field :description, :class => 'span6 m-wrap popovers', "data-trigger" => "hover", "data-content" => "Strength Description", "data-original-title" => "Information"  %>  
+                     </div>
+                  </div>
+                  
+                  <div class="control-group">
+                     <label class="control-label">Strength Type</label>
+                     <div class="controls">
+						<%= f.select(:category, {"" => '', "Web Programming" => 'Web Programming', "Mobile Programming" => 'Mobile Programming', "Development Tools" => 'Development Tools', "Scripting Languages" => 'Scripting Languages', "Servers and OS" => 'Servers and OS', "Databases" => 'Databases', "Others" => 'Others'}, {}, {:class => 'span6 m-wrap', "data-placeholder" => "Strength Type", "tabindex" => "1"})%>
+                     </div>
+                  </div>
+                  
+                  
+                   <div class="control-group">
+                      <label class="control-label">Tools or Technology Image</label>
+                      <div class="controls">
+                         <div class="fileupload fileupload-new" data-provides="fileupload">
+                            <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
+                            	<% unless @strength.image_file_name.nil? %>
+                            		<%= image_tag @strength.image.url(:thumb) %>
+                            	<% else %>
+                               		<img src="/assets/admin/no_profile_image.jpg" alt="" width="150px">
+                               	<% end %>
+                            </div>
+                            <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 190px; max-height: 150px; line-height: 20px;"></div>
+                            <div>
+                               <span class="btn btn-file"><span class="fileupload-new">Browse Image</span>
+                               <span class="fileupload-exists">Change</span>
+                               <%= f.file_field :image, :class => 'default' %>
+                               </span>
+                               <a href="form_component.html#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
+                            </div>
+                         </div>
+                      </div>
+                   </div>
+                 
+                 <div class="control-group">
+                     <label class="control-label">Is Published?</label>
+                     <div class="controls">
+						<%= f.check_box :is_published %>  
+                     </div>
+                  </div>
+                  
+                 
+                  
+                  <div class="form-actions">
+                     <button type="submit" class="btn blue"><%=t :submit %></button>
+					 <a href="/admin/strengths" class="btn"><%=t :cancel %></a>
+                  </div>
+                  
+				  <% end %>
+               <!-- END FORM-->           
+            </div>
+         </div>
+         <!-- END SAMPLE FORM PORTLET-->
+      </div>
+   </div>
+</div>
+
+<% end %>
+<% content_for :page_level_styles do %>
+<link rel="stylesheet" type="text/css" href="/plugins/bootstrap-fileupload/bootstrap-fileupload.css" />
+<link rel="stylesheet" type="text/css" href="/plugins/select2/select2_metro.css" />
+<link rel="stylesheet" href="/plugins/data-tables/DT_bootstrap.css" />
+<% end %>
+
+<% content_for :page_level_plugins do %>
+<script type="text/javascript" src="/plugins/select2/select2.min.js"></script>
+<script type="text/javascript" src="/plugins/data-tables/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/plugins/data-tables/DT_bootstrap.js"></script>
+<script type="text/javascript" src="/plugins/bootstrap-fileupload/bootstrap-fileupload.js"></script>
+
+<%= javascript_include_tag "admin/scripts/table-managed" %> 
+<% end %>
+
+<% content_for :page_level_scripts do %> 
+<script>
+   jQuery(document).ready(function() {       
+      // initiate layout and plugins
+      App.init();
+   });
+</script>
+
+<% end %>

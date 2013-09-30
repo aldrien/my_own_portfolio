@@ -1,0 +1,148 @@
+<% content_for :main_body do %>
+<style>
+	.promo-page .block-grey {
+		min-height: 250px !important;
+		padding: 50px 20px 30px 20px !important;
+		background: #eeedf2 !important;
+	}
+	.port_title{
+		color: #0d638f !important;
+		text-decoration: none !important;
+		font-size: 40px !important;
+		line-height: 50px !important;	
+		margin-top: 15% !important;
+	}
+	.port_type{
+		color: #1171a2 !important;
+		text-decoration: none !important;
+		font-size: 30px !important;
+	}
+	.port_functions p i{
+		padding-right: 10px;
+	}
+	.port_photos{
+		list-style-type: none;
+	}
+	.port_photos li{
+		list-style-type: none;
+		display: inline-block;
+		position: relative;
+	}
+	.port_photos li img{
+		margin: 2px 5px 4px 0px;
+		border-bottom: 2px solid #abaaaa;
+		cursor: pointer;
+	}
+	.d_none{
+		display: none !important;
+	}
+	
+</style>
+
+<div style="border-bottom: 1px solid #FEFEFE;" class="block-grey" >
+	<div class="container">
+		<div class="row-fluid">
+			<div class="row-fluid recent-work margin-bottom-40">
+				
+			    <div class="span6" style="text-align: right !important;">
+			        <%= image_tag @portfolio.image.url(:original), :style => 'max-height: 400px !important;' %>
+			    </div>
+			    <div class="span6" style="text-align: left;">
+		            <p class="port_title"><%= @portfolio.title %></p>
+		            <p class="port_type"><%= @portfolio.portfolio_type %></p>
+			    </div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="block-transparent">
+	<div class="container">
+	 		
+		<div class="row-fluid margin-bottom-20">
+			<div class="row-fluid quote-v1">
+			    <div class="span9 quote-v1-inner">
+			        <span>Functions and Other Details:</span>
+			    </div>
+			</div>	
+		</div>
+		
+		<div class="row-fluid recent-work margin-bottom-40">
+			    <div class="span5 port_functions" style="padding-left: 2% !important;">
+					<%= raw(@portfolio.description) %>
+			    </div>
+			    
+			    <div class="span7" style="text-align: left;">
+					<% @photos = PortfolioPhoto.where(:portfolio_id => @portfolio.id )%>
+		            <ul class="port_photos">
+		            	<% for p in @photos %>
+		            		<li class="thumbs">
+			            		<a href="/images/portfolio_photos/<%= p.id %>/original/<%= p.image_file_name %>" class="fancybox-button" alt="Click to enlarge" title="<%= @portfolio.title %>" data-rel="fancybox-button">
+			            			<%= image_tag p.image.url(:thumb), :title => p.description, :style => 'max-height: 120px;' %>
+			            		</a>
+		            		</li>
+		            	<% end %>
+		            </ul>
+			    </div>
+		</div>
+		
+		    
+		<hr />
+		
+		<div class="row-fluid recent-work margin-bottom-40">
+			    <div class="span3">
+			        <h2><a href="/portfolio">Related Works</a></h2>
+			        <p>List of my accomplishments, sush as Websites, Mobile Applications, Desktop Applications and more...</p>
+			    </div>
+			    <div class="span9">
+			        <ul class="bxslider">
+			        	<% for p in @portfolio_list %>
+			        		<li>
+			        			<em>
+			        				<img src="/images/portfolios/<%= p.id %>/large/<%= p.image_file_name %>" style="height: 180px; max-width: 360px;" />
+			        				<a href="/show_portfolio/<%= p.id %>" title="View Details" ><i class="icon-link icon-hover icon-hover-1"></i></a>
+			        				<a href="/images/portfolios/<%= p.id %>/original/<%= p.image_file_name %>" class="fancybox-button" title="<%= p.title %>" data-rel="fancybox-button">
+			        					<i class="icon-search icon-hover icon-hover-2"></i>
+			        				</a>
+			        			</em>
+			        			<a class="bxslider-block" href="#">
+				                    <strong><%= p.title %></strong>
+				                    <b><%= p.portfolio_type %></b>
+				                </a>
+			        		</li>
+			        	<% end %>
+			        </ul>        
+			    </div>
+			</div>
+		
+	</div>
+</div>
+
+
+
+<% end %>
+
+<% content_for :child_scripts do %>
+	<!-- <script type="text/javascript">
+		$(document).ready(function(){
+			var ctr = 0
+			var li_count = $('.thumbs').length;
+			console.log(li_count);
+			
+			$('.fancybox-next').live("click", function(){
+				$(this).addClass("d_none");
+				// ctr = ctr + 1
+				// if(ctr > li_count){
+					//$(this).css("display", "none");
+				// }
+				// console.log(ctr);
+			});
+			
+			$('.fancybox-prev').live("click", function(){
+				alert('prev')
+			});
+
+		});
+	</script> -->
+<% end %>

@@ -1,0 +1,87 @@
+<% content_for :content do %>
+<div class="container-fluid">
+   <!-- BEGIN PAGE HEADER-->   
+   <div class="row-fluid">
+      <div class="span12">
+  
+         <h3 class="page-title">
+            <%=t :locale_management_tables %>
+         </h3>
+         <ul class="breadcrumb">
+            <li>
+               <i class="icon-home"></i>
+               <a href="/admin">Dashboard</a> 
+               <span class="icon-angle-right"></span>
+            </li>
+            <li>
+               <a href="/admin/portfolio_types">Portfolio Type</a>
+               <span class="icon-angle-right"></span>
+            </li>
+            <li><a href="#">Create Portfolio Type</a></li>
+         </ul>
+      </div>
+   </div>
+   <!-- END PAGE HEADER-->
+   <!-- BEGIN PAGE CONTENT-->
+   <div class="row-fluid">
+      <div class="span12">
+         <!-- BEGIN SAMPLE FORM PORTLET-->   
+         <div class="portlet box blue">
+            <div class="portlet-title">
+               <h4><i class="icon-reorder"></i> Edit Portfolio Type</h4>
+            </div>
+            <div class="portlet-body form">
+               <!-- BEGIN FORM-->
+				 <%= display_validation_errors(@type) %>
+				   <%= form_for(@type, :as => :type, :validate => true, :url => admin_portfolio_type_path, :html => {:class => "form-horizontal"}) do |f| %>                    
+                  
+                  <div class="control-group">
+                     <label class="control-label">Type Name</label>
+                     <div class="controls">
+						<%= f.text_field :name, :class => 'span6 m-wrap popovers', "data-trigger" => "hover", "data-content" => "Type Name", "data-original-title" => "Information"  %>  
+                     </div>
+                  </div>
+                 
+                 <div class="control-group">
+                     <label class="control-label">Description</label>
+                     <div class="controls">
+						<%= f.text_area :description, :class => 'span9 m-wrap wysihtml5', :rows => '6'  %>  
+                     </div>
+                  </div>
+                  <div class="form-actions">
+                     <button type="submit" class="btn blue"><%=t :submit %></button>
+					 <a href="/admin/portfolio_types" class="btn"><%=t :cancel %></a>
+                  </div>
+                  
+				  <% end %>
+               <!-- END FORM-->           
+            </div>
+         </div>
+         <!-- END SAMPLE FORM PORTLET-->
+      </div>
+   </div>
+</div>
+
+<% end %>
+<% content_for :page_level_styles do %>
+<link rel="stylesheet" type="text/css" href="/plugins/select2/select2_metro.css" />
+<link rel="stylesheet" href="/plugins/data-tables/DT_bootstrap.css" />
+<% end %>
+
+<% content_for :page_level_plugins do %>
+<script type="text/javascript" src="/plugins/select2/select2.min.js"></script>
+<script type="text/javascript" src="/plugins/data-tables/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/plugins/data-tables/DT_bootstrap.js"></script>
+
+<%= javascript_include_tag "admin/scripts/table-managed" %> 
+<% end %>
+
+<% content_for :page_level_scripts do %> 
+<script>
+   jQuery(document).ready(function() {       
+      // initiate layout and plugins
+      App.init();
+   });
+</script>
+
+<% end %>

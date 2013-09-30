@@ -1,0 +1,179 @@
+<% content_for :content do %>
+
+<link rel="shortcut icon" href="/assets/favicon.ico" />
+  <style type="text/css">
+  	.login_stye {
+		position: relative;
+		margin: 80px auto;
+		width: 400px;
+		padding-right: 32px;
+		font-weight: 300;
+		color: #a8a7a8;
+		text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.8);
+	}
+	.login_style p {
+		margin: 0 0 10px;
+	}
+	
+	/* Style for overlay and box */
+        .overlay{
+            background:transparent url("/assets/img/overlay.png") repeat top left;
+            position:fixed;
+            top:0px;
+            bottom:0px;
+            left:0px;
+            right:0px;
+            z-index:100;
+        }
+        .box{
+            position:fixed;
+            top:-200px;
+            /*left:30%;
+            right:30%;*/
+            background-color:#fff;
+            color:#7F7F7F;
+            padding:20px;
+            border:1px solid #fff;
+            z-index:101;
+            text-shadow: none;
+            width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .box h1{
+            border-bottom: 1px solid #636161;
+            margin:-20px -20px 0px -20px;
+            padding:10px;
+            color: white;
+			text-shadow: none;
+			background-color: #ad0404;
+			font-weight: bold;
+        }
+        /*a.boxclose{
+            float:right;
+            width:26px;
+            height:26px;
+            background:transparent url("/assets/img/cancel.png") repeat top left;
+            margin-top:-30px;
+            margin-right:-30px;
+            cursor:pointer;
+        }*/
+       .btn.red {
+		color: white;
+		text-shadow: none;
+		background-color: #ad0404;
+		}
+		.btn {
+		background-color: #fff;
+		background-image: none;
+		filter: none;
+		border: 0;
+		box-shadow: none;
+		padding: 7px 14px;
+		text-shadow: none;
+		font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+		font-size: 14px;
+		color: #333333;
+		cursor: pointer;
+		outline: none;
+		-webkit-border-radius: 0 !important;
+		-moz-border-radius: 0 !important;
+		border-radius: 0 !important;
+		}
+  </style>
+
+	
+<div style="margin-left: auto; margin-right: auto;"> 
+	<%= form_tag admin_doLogin_path(:locale => I18n.locale), :method => 'post', :class => "login" do %>
+	
+	    <p>
+	      <label>Username:</label>
+	      <input id="name" type="text" name="Username"  />
+	    </p>
+	
+	    <p>
+	      <label for="password">Password:</label>
+	      <input  type="password" name="Password" />
+	    </p>
+	
+	    <p class="login-submit">
+	      <button type="submit" class="login-button" title="Login">Login</button>
+	    </p>
+		
+	    
+	    <input style="margin-left: 25%;" type="checkbox" name="remember_me"/> Remember me
+	    
+	    
+	    <!-- <p class="forgot-password"><a href="index.html">Forgot your password?</a></p> -->
+	    
+  <% end %>
+	<!-- <#%= form_tag( {:action => :doLogin}, :validate => true, :class => "form-vertical login-form" ) %> -->
+	<!-- 
+   <div align="center">
+  	<img src="/assets/hate.png" style="height: 100px;" alt="" /> 
+  </div>
+  <hr />
+  <h3 class="form-title">Login to your account</h3>
+  <div class="control-group">
+    <div class="controls">
+      <div class="input-icon left">
+        <i class="icon-user"></i>
+        <input style="text-indent: 30px; width: 95%;" class="m-wrap" type="text" placeholder="Username" name="Username"  />
+      </div>
+    </div>
+  </div>
+  <div class="control-group">
+    <div class="controls">
+      <div class="input-icon left">
+        <i class="icon-lock"></i>
+        <input style="text-indent: 30px; width: 95%;" class="m-wrap" type="password" style="" placeholder="Password" name="Password" />
+      </div>
+    </div>
+  </div>
+  <div class="form-actions">
+    <label style="margin-left: 20px;" class="checkbox">
+    <input type="checkbox" name="remember_me"/> Remember me
+    </label>
+            
+	<button type="submit" class="btn green pull-right">Login<i class="m-icon-swapright m-icon-white"></i></button>
+  </div> -->
+  
+</div>
+  
+<!-- END LOGIN FORM -->        
+ <div class="overlay" id="overlay" style="display:none;"></div>
+        <div class="box" id="box">
+            <!-- <a class="boxclose" id="boxclose"></a> -->
+            <h1>Error Message!</h1>
+            <p style="margin-top: 30px;">
+                The Username or Password you have entered was invalid.<br />
+                Please try again.
+            </p>
+            <p align="right">
+            	<button id="btn_ok" type="button" class="btn red">OK</button>
+            </p>
+        </div>
+        <script type="text/javascript" src="/plugins/jquery-1.8.3.min.js"></script>
+        <script type="text/javascript">
+            $(function() {
+            	
+            	$('#name').focus();
+            	
+            	<% if flash[:error] %>
+            		$('#overlay').fadeIn('fast',function(){
+                        $('#box').animate({'top':'160px'},500);
+                    });
+            	<% end %>
+                
+                $('#btn_ok').click(function(){
+                    $('#box').animate({'top':'-200px'},500,function(){
+                        $('#overlay').fadeOut('fast');
+                    });
+                    $('#name').focus();
+                });
+
+            });
+        </script>
+ 
+ 
+<% end %>

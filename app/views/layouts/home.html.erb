@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+<!-- BEGIN HEAD -->
+<head>
+   <meta charset="utf-8" />
+   <title>Mr. Hate | <%= @main_title %></title>
+   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+   <meta content="" name="description" />
+   <meta content="" name="author" />
+   <!-- BEGIN GLOBAL MANDATORY STYLES -->
+   <link href="plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+   <link href="plugins/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css"/>
+   <link href="plugins/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css"/>
+   <link href="assets/frontend/style-metro.css" rel="stylesheet" />
+   <link href="assets/frontend/style.css" rel="stylesheet" type="text/css"/>
+   <link href="assets/frontend/style-responsive.css" rel="stylesheet" type="text/css"/>
+   <link href="assets/frontend/themes/default.css" rel="stylesheet" type="text/css" id="style_color"/>
+   <link href="assets/frontend/uniform/css/uniform.default.css" rel="stylesheet" type="text/css"/>
+   <!-- END GLOBAL MANDATORY STYLES -->
+   <link href="assets/frontend/pages/promo.css" rel="stylesheet" type="text/css"/>
+   <link href="assets/frontend/animate.css" rel="stylesheet" type="text/css"/>
+   
+   <!-- Revolution Slider -->
+   <!-- <link href="plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="plugins/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css"/> -->
+   
+   <!-- <link  href="plugins/revolution_slider/rs-style.css" rel="stylesheet" media="screen">
+    <link  href="plugins/revolution_slider/rs-plugin/css/settings.css" rel="stylesheet" media="screen">   -->
+    
+    <link href="plugins/css/themes/blue.css" rel="stylesheet" type="text/css"/>
+   
+   <link rel="shortcut icon" href="assets/favicon.ico" />
+<style>
+	.fonts_size{
+		font-size: 47px; padding: 0px; margin: 0px; border: 0px; line-height: 20px; white-space: nowrap; opacity: 1;
+	}
+</style>
+
+</head>
+<!-- END HEAD -->
+<!-- BEGIN BODY -->
+<body class="fixed-top">
+   <!-- BEGIN HEADER -->
+   <div class="header navbar navbar-inverse navbar-fixed-top">
+      <!-- BEGIN TOP NAVIGATION BAR -->
+      <div class="navbar-inner">
+         <div class="container">
+            <!-- BEGIN LOGO -->
+            <a class="brand" href="/">
+            <img src="assets/hate2.png" style="" alt="logo" />
+            </a>
+            <!-- END LOGO -->
+            <!-- BEGIN HORIZANTAL MENU -->
+            <div class="navbar hor-menu hidden-phone hidden-tablet">
+               <div class="navbar-inner">
+                  <ul class="nav">
+                     <li class="visible-phone visible-tablet">
+                        <!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
+                        <form class="sidebar-search">
+                           <div class="input-box">
+                              <a href="javascript:;" class="remove"></a>
+                              <input type="text" placeholder="Search..." />            
+                              <input type="button" class="submit" value=" " />
+                           </div>
+                        </form>
+                        <!-- END RESPONSIVE QUICK SEARCH FORM -->
+                     </li>
+                     <li class="<% if @menu == "Home" %>active<% end %>">
+                        <a href="/">
+                        Home
+                        </a>
+                     </li>
+                     <li>
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="javascript:;">
+                        <span class="selected"></span>
+                        Products
+                        <span class="arrow"></span>     
+                        </a>
+                        <ul class="dropdown-menu">
+                           <li class="active">
+                              <a href="layout_horizontal_sidebar_menu.html">
+                              	Products Here...
+                              </a>
+                           </li>
+                           <li class="dropdown-submenu">
+                              <a tabindex="-1" href="javascript:;">
+                              More Products..
+                              <span class="arrow"></span>
+                              </a>
+                              <ul class="dropdown-menu">
+                                 <li><a tabindex="-1" href="#">Second level link</a></li>
+                                 <li class="dropdown-submenu">
+                                    <a tabindex="-1" href="javascript:;">More options<span class="arrow"></span></a>
+                                    <ul class="dropdown-menu">
+                                       <li><a tabindex="-1" href="#">Third level link</a></li>
+                                       <li><a tabindex="-1" href="#">Third level link</a></li>
+                                       <li><a tabindex="-1" href="#">Third level link</a></li>
+                                       <li><a tabindex="-1" href="#">Third level link</a></li>
+                                       <li><a tabindex="-1" href="#">Third level link</a></li>
+                                    </ul>
+                                 </li>
+                                 <li><a tabindex="-1" href="#">Second level link</a></li>
+                                 <li><a tabindex="-1" href="#">Second level link</a></li>
+                                 <li><a tabindex="-1" href="#">Second level link</a></li>
+                              </ul>
+                           </li>
+                        </ul>
+                        <b class="caret-out"></b>                        
+                     </li>
+                     
+                     <!-- <li>
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="">Information
+                        <span class="arrow"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                           <li><a href="#">About Me</a></li>
+                           <li><a href="#">Registration</a></li>
+                        </ul>
+                        <b class="caret-out"></b>                        
+                     </li> -->
+                     <li><a href="portfolio">Portfolio</a></li>
+                     <li><a href="about_me">About Me</a></li>
+                     <li><a href="contact_me">Contact Me</a></li>
+                     <li>
+                     	<a href="gallery">Gallery</a>
+                     </li>
+                     <li>
+                        <a href="#">
+                        Sitemap
+                        </a>
+                     </li>
+                     
+                     
+                     <li>
+                        <span class="hor-menu-search-form-toggler">&nbsp;</span>
+                        <div class="search-form hidden-phone hidden-tablet">
+                           <form class="form-search">
+                              <div class="input-append">
+                                 <input type="text" placeholder="Search..." class="m-wrap">
+                                 <button type="button" class="btn"></button>
+                              </div>
+                           </form>
+                        </div>
+                     </li>
+                  </ul>
+               </div>
+            </div>
+            <!-- BEGIN RESPONSIVE MENU TOGGLER -->
+            <a href="javascript:;" class="btn-navbar collapsed" data-toggle="collapse" data-target=".nav-collapse">
+            <img src="assets/img/menu-toggler.png" alt="" />
+            </a>          
+            <!-- END RESPONSIVE MENU TOGGLER -->     
+            
+            <!-- END TOP NAVIGATION MENU --> 
+         </div>
+      </div>
+      <!-- END TOP NAVIGATION BAR -->
+   </div>
+   <!-- END HEADER -->
+   <!-- BEGIN CONTAINER -->   
+   <div class="page-container row-fluid full-width-page">
+      <!-- BEGIN EMPTY PAGE SIDEBAR -->
+      <div class="page-sidebar nav-collapse collapse visible-phone visible-tablet">
+         <ul>
+            <li class="visible-phone visible-tablet">
+               <!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
+               <form class="sidebar-search">
+                  <div class="input-box">
+                     <a href="javascript:;" class="remove"></a>
+                     <input type="text" placeholder="Search..." />            
+                     <input type="button" class="submit" value=" " />
+                  </div>
+               </form>
+               <!-- END RESPONSIVE QUICK SEARCH FORM -->
+            </li>
+            <li>
+               <a class="active" href="#">
+               Home                       
+               </a>
+            </li>
+            <li  class="active">
+               <a href="javascript:;">
+               Products
+               <span class="arrow open"></span>   
+               <span class="selected"></span>   
+               </a>
+               <ul class="sub-menu">
+                  <li>
+                     <a href="layout_horizontal_sidebar_menu.html">
+                     Products Here...
+                     </a>
+                  </li>
+                 
+                  <li>
+                     <a href="javascript:;">
+                     More Products...
+                     <span class="arrow"></span>
+                     </a>
+                     <ul class="sub-menu">
+                        <li><a href="#">Second level link</a></li>
+                        <li>
+                           <a href="javascript:;">More options<span class="arrow"></span></a>
+                           <ul class="sub-menu">
+                              <li><a href="#">Third level link</a></li>
+                              <li><a href="#">Third level link</a></li>
+                              <li><a href="#">Third level link</a></li>
+                              <li><a href="#">Third level link</a></li>
+                              <li><a href="#">Third level link</a></li>
+                           </ul>
+                        </li>
+                        <li><a href="#">Second level link</a></li>
+                        <li><a href="#">Second level link</a></li>
+                        <li><a href="#">Second level link</a></li>
+                     </ul>
+                  </li>
+               </ul>
+            </li>
+            <li><a href="portfolio">Portfolio</a> </li>
+             <li><a href="about_me">About Me</a></li>
+             <li><a href="contact_me">Contact Me</a></li>
+             <li>
+             	<a href="gallery">Gallery</a>
+             </li>
+             <li>
+                <a href="#">
+                Sitemap
+                </a>
+             </li>
+         </ul>
+      </div>
+      <!-- END EMPTY PAGE SIDEBAR -->
+    
+      <!-- BEGIN PAGE -->
+      <div class="page-content no-min-height">
+         <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+         <div id="portlet-config" class="modal hide">
+            <div class="modal-header">
+               <button data-dismiss="modal" class="close" type="button"></button>
+               <h3>portlet Settings</h3>
+            </div>
+            <div class="modal-body">
+               <p>Here will be a configuration form</p>
+            </div>
+         </div>
+         <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+        
+         <div class="container-fluid promo-page">
+            <div class="row-fluid" >
+               	
+                  
+                  
+                   <%= yield(:content) %>
+                  
+                 
+                  
+                  
+                  <div class="block-footer">
+                     <div class="container">
+                        <div class="row-fluid">
+                           <div class="span4">
+                              <h3>About Me</h3>
+                              <p>
+                              	<%= raw(@about_me.content[0..91])%>	
+                              	<br /><a class="more" href="about_me">Read more <i class="icon-angle-right"></i></a>
+                              </p>
+                              
+                           </div>
+                           <div class="span4 space-mobile">
+			                    <h3>Contacts</h3>
+			                    <address class="margin-bottom-40">
+			                        Olongapo City <br />
+			                        Zambales, Philippines <br />
+			                        Subic Bay Freeport Zone <br />
+			                        (047) 222-2222 <br />
+			                        Email: <a href="#">aldrien.test@gmail.com</a>                        
+			                    </address>
+			                </div>
+                           <div class="span4">
+                              <h3>Follow Me On</h3>
+                              <ul class="social-icons">
+                                 <li><a href="#" data-original-title="facebook" class="facebook"></a></li>
+                                 <li><a href="#" data-original-title="Goole Plus" class="googleplus"></a></li>
+                                 <li><a href="#" data-original-title="linkedin" class="linkedin"></a></li>
+                                 <li><a href="#" data-original-title="skype" class="skype"></a></li>
+                                 <li><a href="#" data-original-title="twitter" class="twitter"></a></li>
+                                 <li><a href="#" data-original-title="yahoo" class="yahoo"></a></li>
+                                 <li><a href="#" data-original-title="youtube" class="youtube"></a></li>
+                              </ul>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               
+            </div>
+         </div>
+         <!-- END PAGE CONTENT-->
+      </div>
+      <!-- END PAGE CONTAINER--> 
+   </div>
+   <!-- END PAGE --> 
+   <!-- END CONTAINER -->
+   <!-- BEGIN FOOTER -->
+   <div class="footer">
+      <div class="container">
+         Mr. Hate 2013 &copy; All Rights Reserved.
+         <div class="span pull-right">
+            <span class="go-top"><i class="icon-angle-up"></i></span>
+         </div>
+      </div>
+   </div>
+   <!-- END FOOTER -->
+       
+   <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
+   <!-- BEGIN CORE PLUGINS -->
+	
+   <script src="plugins/jquery-1.8.3.min.js" type="text/javascript"></script>   
+   <!-- IMPORTANT! Load jquery-ui-1.10.1.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->  
+   <script src="plugins/jquery-ui/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>      
+   <script src="plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+   <!--[if lt IE 9]>
+   <script src="assets/excanvas.js"></script>
+   <script src="assets/respond.js"></script>  
+   <![endif]-->   
+   <script src="plugins/breakpoints/breakpoints.js" type="text/javascript"></script>  
+   <!-- IMPORTANT! jquery.slimscroll.min.js depends on jquery-ui-1.10.1.custom.min.js --> 
+   <script src="plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+   <script src="plugins/jquery.blockui.js" type="text/javascript"></script>  
+   <script src="plugins/jquery.cookie.js" type="text/javascript"></script>
+   <script src="plugins/uniform/jquery.uniform.min.js" type="text/javascript" ></script> 
+   <!-- END CORE PLUGINS -->
+   <script src="plugins/scripts/app.js"></script>  
+   
+  
+    <script type="text/javascript" src="plugins/scripts/index.js"></script>    
+     
+   <!-- Script for Revolution Slider -->
+   <!-- <script type="text/javascript" src="plugins/revolution_slider/jquery.min.js" ></script> -->
+    <!-- <script type="text/javascript" src="plugins/revolution_slider/rs-plugin/js/jquery.themepunch.plugins.min.js"></script>
+    <script type="text/javascript" src="plugins/revolution_slider/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>   
+    <script type="text/javascript" src="plugins/revolution_slider/scripts/index.js"></script>     -->
+       
+   <script>
+      jQuery(document).ready(function() {    
+         App.init();
+         // Index.initRevolutionSlider();  
+         jQuery('#promo_carousel').carousel({
+            interval: 10000,
+            pause: 'hover'
+         });
+      });
+   </script>
+   <!-- END JAVASCRIPTS -->
+ 
+</body>
+<!-- END BODY -->
+</html>
